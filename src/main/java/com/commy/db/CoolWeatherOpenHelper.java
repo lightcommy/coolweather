@@ -15,7 +15,7 @@ public class CoolWeatherOpenHelper extends SQLiteOpenHelper {
     public static final String CREATE_PROVINCE="create table Province(" +
             "id integer primary key autoincrement," +
             "province_name text," +
-            "province_code text,";
+            "province_code text)";
 
     /*
         city建表语句：
@@ -48,7 +48,13 @@ public class CoolWeatherOpenHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_COUNTY);
     }
 
-    public void onUpgrade(SQLiteDatabase db,int oldVersion,int newVersion){
 
+    public void onUpgrade(SQLiteDatabase db,int oldVersion,int newVersion){
+        db.execSQL("drop table if exists Province");
+        db.execSQL("drop table if exists City");
+        db.execSQL("drop table if exists County");
+        onCreate(db);
     }
+
+
 }
